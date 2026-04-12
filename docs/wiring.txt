@@ -1,0 +1,35 @@
+ESP32-WROOM
+                 (USB-C facing down)
+                 
+    LEFT SIDE                RIGHT SIDE
+    
+    EN  |                        | D23 --> GC9A01 SDA
+    VP  |                        | D22 --> BME280 SCL
+        |                        |         BH1750 SCL
+    VN  |                        | TXO
+    D34 --> RAIN AO              | RXO
+    D35 --> MQ135 AO             | D21 --> BME280 SDA
+    D32 --> MQ2 AO               |         BH1750 SDA
+    D33 |                        | D19
+    D25 |                        | D18 --> GC9A01 SCL
+    D26 |                        | D5  --> GC9A01 CS
+    D27 |                        | D17 --> GC9A01 DC
+    D14 |                        | D16 --> GC9A01 RST
+    D12 |                        | D4
+    D13 |                        | D2
+    GND --> ALL GND              | D15
+    VIN --> MQ135 VCC            | GND --> ALL GND
+            MQ2 VCC              | 3V3 --> BME280 VIN
+                                 |         BH1750 VCC
+                                 |         RAIN VCC
+                                 |         GC9A01 VCC
+
+
+BME280          BH1750          RAIN SENSOR     MQ-135          MQ-2            GC9A01
+VIN <-- 3V3     VCC <-- 3V3     VCC <-- 3V3     VCC <-- VIN     VCC <-- VIN     VCC <-- 3V3
+GND <-- GND     GND <-- GND     GND <-- GND     GND <-- GND     GND <-- GND     GND <-- GND
+SCL <-- D22     SCL <-- D22     AO  --> D34     AO  --> D35     AO  --> D32     SCL <-- D18
+SDA <-- D21     SDA <-- D21     DO  --> NC      DO  --> NC      DO  --> NC      SDA <-- D23
+                ADDR --> GND                                                    CS  <-- D5
+                                                                                DC  <-- D17
+                                                                                RST <-- D16
