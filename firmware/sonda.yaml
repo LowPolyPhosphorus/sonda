@@ -1,0 +1,102 @@
+esphome:
+  name: sonda
+  friendly_name: Sonda
+
+esp32:
+  board: esp32dev
+  framework:
+    type: arduino
+
+logger:
+
+api:
+  encryption:
+    key: !secret api_encryption_key
+
+ota:
+  - platform: esphome
+    password: !secret ota_password
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+  ap:
+    ssid: "sonda fallback"
+    password: !secret fallback_password
+
+captive_portal:
+
+i2c:
+  sda: GPIO21
+  scl: GPIO22
+  scan: true
+
+spi:
+  clk_pin: GPIO18
+  mosi_pin: GPIO23
+
+display:
+  - platform: ili9xxx
+    model: GC9A01A
+    cs_pin: GPIO5
+    dc_pin: GPIO17
+    reset_pin: GPIO16
+    rotation: 0
+    lambda: |-
+      it.printf(120, 90, id(font1), TextAlign::CENTER, "%.1f°F", id(temperature).state);
+      it.printf(120, 130, id(font1), TextAlign::CENTER, "%.0f%%", id(humidity).state);
+      it.printf(120, 170, id(font1), TextAlign::CENTER, "%.0f hPa", id(pressure).state);
+
+font:
+  - file: "gfonts://Roboto"
+    id: font1
+    size: 20
+
+sensor:
+  - platform: bme280_i2c
+    temperature:
+      name: "Temperature"
+      id: temperature
+      unit_of_measurement: "°F"
+      filters:
+        - lambda: return x * (9.0/5.0) + 32.0;
+    humidity:
+      name: "Humidity"
+      id: humidity
+    pressure:
+      name: "Pressure"
+      id: pressure
+    address: 0x76
+    update_interval: 30s
+
+  - platform: bh1750
+    name: "Light Intensity"
+    address: 0x23
+    update_interval: 30s
+
+  - platform: adc
+    pin: GPIO34
+    name: "Rain Intensity"
+    update_interval: 10s
+    attenuation: 11db
+    filters:
+      - lambda: return (1.0 - (x / 3.3)) * 100.0;
+    unit_of_measurement: "%"
+
+  - platform: adc
+    pin: GPIO35
+    name: "Air Quality MQ135"
+    update_interval: 30s
+    attenuation: 11db
+    unit_of_measurement: "V"
+
+  - platform: adc
+    pin: GPIO32
+    name: "Smoke MQ2"
+    update_interval: 30s
+    attenuation: 11db
+    unit_of_measurement: "V"
+
+button:
+  - platform: restart
+    name: "Sonda Restart"
