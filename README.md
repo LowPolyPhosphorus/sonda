@@ -1,4 +1,4 @@
-# Sonda - Weather Machine
+![Sonda](images/sonda.png)
 
 An outdoor weather station built on ESP32 and ESPHome that monitors temperature, humidity, atmospheric pressure, light intensity, rainfall, air quality, and wildfire smoke, reporting all data locally to Home Assistant with zero cloud dependency.
 
