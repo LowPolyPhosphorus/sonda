@@ -37,3 +37,5 @@ Check your power supply. The ESP32 plus all six modules draws more current than 
 ## WiFi keeps disconnecting
 
 If Sonda is far from your router the fallback hotspot will activate automatically. Connect to the fallback hotspot named "sonda fallback" and use the captive portal to reconfigure WiFi if needed.
+
+> i havent made this yet, this is just what i would do if these are/become a problem 
