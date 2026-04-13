@@ -6,6 +6,7 @@
 - ESPHome CLI
 - Home Assistant with ESPHome integration
 - Python 3.x
+- HACS with Mushroom Cards installed in Home Assistant
 
 ## Installing ESPHome
 
@@ -14,6 +15,12 @@ Open PowerShell and run:
 ```powershell
 pip install esphome
 ```
+
+## Installing Mushroom Cards
+
+1. Install HACS in Home Assistant if not already installed
+2. Go to HACS > Frontend > Search "Mushroom"
+3. Install Mushroom and restart Home Assistant
 
 ## Setting Up Files
 
