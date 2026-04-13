@@ -1,0 +1,17 @@
+type: entities
+title: Sonda
+entities:
+  - entity: sensor.sonda_temperature
+    name: Temperature
+  - entity: sensor.sonda_humidity
+    name: Humidity
+  - entity: sensor.sonda_pressure
+    name: Pressure
+  - entity: sensor.sonda_light_intensity
+    name: Light
+  - entity: sensor.sonda_rain_intensity
+    name: Rain
+  - entity: sensor.sonda_air_quality_mq135
+    name: Air Quality
+  - entity: sensor.sonda_smoke_mq2
+    name: Smoke
